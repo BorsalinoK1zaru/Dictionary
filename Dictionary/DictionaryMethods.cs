@@ -46,26 +46,8 @@ namespace Dictionary
         {
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load((dType) ? "RusAnglD.xml" : "AnglRusD.xml");
-            XmlElement? xRoot = xDoc.DocumentElement;
-            // создаем новый элемент record
-            XmlElement newRecord = xDoc.CreateElement("record");
-            // создаем атрибут word
-            XmlAttribute nameAttr = xDoc.CreateAttribute("word");
-            // создаем элемент value
-            XmlElement companyElem = xDoc.CreateElement("value");
-            // создаем текстовые значения для элементов и атрибута
-            XmlText nameText = xDoc.CreateTextNode(word);
-            XmlText companyText = xDoc.CreateTextNode(val);
-            //добавляем узлы
-            nameAttr.AppendChild(nameText);
-            companyElem.AppendChild(companyText);
-            // добавляем атрибут name
-            newRecord.Attributes.Append(nameAttr);
-            // добавляем элементы company и age
-            newRecord.AppendChild(companyElem);
-            // добавляем в корневой элемент новый элемент person
-            xRoot?.AppendChild(newRecord);
-            // сохраняем изменения xml-документа в файл
+            var xRoot = new XElement("dictionary");
+            
             xDoc.Save((dType)?"RusAnglD.xml":"AnglRusD.xml");
         }
         public static int GetRes()
